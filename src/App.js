@@ -2,24 +2,35 @@ import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
 
-const CustomElement = styled.div`
-  font-size: 30px;
+const Logo = styled.div`
+  font-size: 1.5em;
 `;
-const BlueElement = styled(CustomElement)`
-`
+const ControlButton = styled.div`
+`;
+
+const AppLayout = styled.div`
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 180px auto 100px 100px; 
+`;
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <CustomElement>
-          <p>Hello World!</p>
-        </CustomElement>
-        <BlueElement>
-          Great
-        </BlueElement>
+      <AppLayout>
+        <Logo>
+          CyptoDash
+        </Logo>
+        <div>
+        </div>
+        <ControlButton>
+          DashBoard
+        </ControlButton>
+        <ControlButton>
+          Settings
+        </ControlButton>
 
-      </div>
+      </AppLayout>
 
     );
   }
