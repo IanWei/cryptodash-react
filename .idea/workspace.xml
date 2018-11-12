@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="736290d3-58a0-48d1-bb8f-e7964ed5b023" name="Default Changelist" comment="˚">
-      <change afterPath="$PROJECT_DIR$/src/Settings/CoinGrid.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Settings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Settings/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Shared/Styles.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -33,7 +32,7 @@
           <entry key="css" value="5" />
           <entry key="gitignore" value="1" />
           <entry key="html" value="2" />
-          <entry key="js" value="21" />
+          <entry key="js" value="22" />
           <entry key="json" value="1" />
         </counts>
       </usages-collector>
@@ -42,7 +41,7 @@
           <entry key="CSS" value="5" />
           <entry key="HTML" value="2" />
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="21" />
+          <entry key="JavaScript" value="22" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -92,18 +91,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="209">
               <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App/AppBar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="32" column="37" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -177,7 +164,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Settings/CoinGrid.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="114">
@@ -185,6 +172,15 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Shared/Styles.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -227,6 +223,7 @@
         <option value="$PROJECT_DIR$/src/Shared/Content.js" />
         <option value="$PROJECT_DIR$/src/Settings/index.js" />
         <option value="$PROJECT_DIR$/src/Settings/CoinGrid.js" />
+        <option value="$PROJECT_DIR$/src/Shared/Styles.js" />
       </list>
     </option>
   </component>
@@ -347,12 +344,12 @@
       <workItem from="1541941020927" duration="12000" />
       <workItem from="1541993410978" duration="203000" />
       <workItem from="1541993841152" duration="817000" />
-      <workItem from="1541995855240" duration="1980000" />
+      <workItem from="1541995855240" duration="2267000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23493000" />
+    <option name="totallyTimeSpent" value="23780000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -544,6 +541,13 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Shared/Styles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
         </state>
       </provider>
     </entry>
