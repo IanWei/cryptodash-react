@@ -22,7 +22,6 @@ export class AppProvider extends Component {
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
     this.setState({coinList});
-    console.log(this.state.coinList);
   };
 
 
