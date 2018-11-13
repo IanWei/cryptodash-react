@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import moment from 'moment';
 
-const cc = require('cryptocompare');
+const cc = require( 'cryptocompare' );
 
 export const AppContext = React.createContext();
 
 const MAX_FAVORITES = 10;
+const TIME_UNITS = 10;
 
 export class AppProvider extends Component {
   constructor(props) {
     super( props );
     this.state = {
       page: 'dashboard',
-      favorites: ['BTC', 'ETH', 'XMR', 'DOGE'],
+      favorites: [ 'BTC', 'ETH', 'XMR', 'DOGE' ],
       ...this.saveSettings(),
       setPage: this.setPage,
       addCoin: this.addCoin,
@@ -27,72 +29,107 @@ export class AppProvider extends Component {
   componentDidMount() {
     this.fetchCoins();
     this.fetchPrices();
+    this.fetchHistorical();
   }
 
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
-    this.setState({coinList});
+    this.setState( { coinList } );
   };
 
   fetchPrices = async () => {
-    if (this.state.firstVisit) return;
+    if ( this.state.firstVisit ) return;
     let prices = await this.prices();
-    console.log(prices);
-    this.setState({prices});
+    console.log( prices );
+    this.setState( { prices } );
+  };
+
+  fetchHistorical = async () => {
+    if ( this.state.firstVisit ) return;
+    let results = await this.historical();
+    let historical = [ {
+        name: this.state.currentFavorite,
+        data: results.map((ticker, index) => [
+          moment().subtract({months: TIME_UNITS - index}).valueOf(),
+          ticker.USD
+        ])
+      } ];
+    this.setState({historical});
+    console.log(this.state.historical);
   };
 
   prices = async () => {
     let returnData = [];
-    for (let i = 0; i < this.state.favorites.length; i++) {
+    for ( let i = 0; i < this.state.favorites.length; i++ ) {
       try {
-        let priceData = await cc.priceFull(this.state.favorites[i], 'USD');
-        returnData.push(priceData);
+        let priceData = await cc.priceFull( this.state.favorites[ i ], 'USD' );
+        returnData.push( priceData );
       }
       catch ( e ) {
-        console.warn('Fetch price error: ', e);
+        console.warn( 'Fetch price error: ', e );
       }
     }
     return returnData;
   };
 
+  historical = () => {
+    let promises = [];
+    for ( let units = TIME_UNITS; units > 0; units-- ) {
+      promises.push(
+        cc.priceHistorical(
+          this.state.currentFavorite,
+          [ 'USD' ],
+          moment()
+            .subtract( { months: units } )
+            .toDate()
+        )
+      )
+    }
+    return Promise.all( promises );
+  };
+
   addCoin = key => {
-    let favorites = [...this.state.favorites];
-    if (favorites.length < MAX_FAVORITES) {
-      favorites.push(key);
-      this.setState({favorites})
+    let favorites = [ ...this.state.favorites ];
+    if ( favorites.length < MAX_FAVORITES ) {
+      favorites.push( key );
+      this.setState( { favorites } )
     }
   };
 
   removeCoin = key => {
-    let favorites = [...this.state.favorites];
-    this.setState({favorites: _.pull(favorites, key)})
+    let favorites = [ ...this.state.favorites ];
+    this.setState( { favorites: _.pull( favorites, key ) } )
   };
 
-  isInFavorites = key => _.includes(this.state.favorites, key);
+  isInFavorites = key => _.includes( this.state.favorites, key );
 
   confirmFavorites = () => {
-    let currentFavorite = this.state.favorites[0];
-    this.setState({
+    let currentFavorite = this.state.favorites[ 0 ];
+    this.setState( {
       firstVisit: false,
       page: 'dashboard',
-      currentFavorite
+      currentFavorite,
+      price: null,
+      historical: null
     }, () => {
       this.fetchPrices();
-    });
-    localStorage.setItem("cryptoDash", JSON.stringify({
+      this.fetchHistorical();
+    } );
+    localStorage.setItem( "cryptoDash", JSON.stringify( {
       favorites: this.state.favorites,
       currentFavorite
-    }));
+    } ) );
   };
 
   setCurrentFavorite = (sym) => {
-    this.setState({
+    this.setState( {
+      currentFavorite: sym,
+      historical: null,
+    }, this.fetchHistorical );
+    localStorage.setItem( 'cryptoDash', JSON.stringify( {
+      ...JSON.parse( localStorage.getItem( 'cryptoDash' ) ),
       currentFavorite: sym
-    });
-    localStorage.setItem('cryptoDash', JSON.stringify({
-      ...JSON.parse(localStorage.getItem('cryptoDash')),
-      currentFavorite: sym
-    }))
+    } ) )
   };
 
   saveSettings() {
@@ -100,13 +137,13 @@ export class AppProvider extends Component {
     if ( !cryptoDashData ) {
       return { page: 'settings', firstVisit: true }
     }
-    let {favorites, currentFavorite} = cryptoDashData;
-    return {favorites, currentFavorite};
+    let { favorites, currentFavorite } = cryptoDashData;
+    return { favorites, currentFavorite };
   }
 
   setPage = page => this.setState( { page } );
 
-  setFilterCoins = (filteredCoins) => this.setState({filteredCoins});
+  setFilterCoins = (filteredCoins) => this.setState( { filteredCoins } );
 
   render() {
     return (
