@@ -11,7 +11,7 @@ export const CoinGridStyled = styled.div`
 `;
 
 const getLowerSectionCoins = (coinList, filteredCoins) => {
-  return filteredCoins && Object.keys(filteredCoins) ||
+  return (filteredCoins && Object.keys(filteredCoins)) ||
     Object.keys(coinList).slice(0, 100)
 };
 
