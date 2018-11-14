@@ -15,6 +15,7 @@ export class AppProvider extends Component {
     this.state = {
       page: 'dashboard',
       favorites: [ 'BTC', 'ETH', 'XMR', 'DOGE' ],
+      timeInterval: 'months',
       ...this.saveSettings(),
       setPage: this.setPage,
       addCoin: this.addCoin,
@@ -22,7 +23,8 @@ export class AppProvider extends Component {
       isInFavorites: this.isInFavorites,
       confirmFavorites: this.confirmFavorites,
       setFilterCoins: this.setFilterCoins,
-      setCurrentFavorite: this.setCurrentFavorite
+      setCurrentFavorite: this.setCurrentFavorite,
+      changeChartSelect: this.changeChartSelect
     }
   }
 
@@ -40,7 +42,6 @@ export class AppProvider extends Component {
   fetchPrices = async () => {
     if ( this.state.firstVisit ) return;
     let prices = await this.prices();
-    console.log( prices );
     this.setState( { prices } );
   };
 
@@ -50,12 +51,11 @@ export class AppProvider extends Component {
     let historical = [ {
         name: this.state.currentFavorite,
         data: results.map((ticker, index) => [
-          moment().subtract({months: TIME_UNITS - index}).valueOf(),
+          moment().subtract({[this.state.timeInterval]: TIME_UNITS - index}).valueOf(),
           ticker.USD
         ])
       } ];
     this.setState({historical});
-    console.log(this.state.historical);
   };
 
   prices = async () => {
@@ -80,7 +80,7 @@ export class AppProvider extends Component {
           this.state.currentFavorite,
           [ 'USD' ],
           moment()
-            .subtract( { months: units } )
+            .subtract( { [this.state.timeInterval]: units } )
             .toDate()
         )
       )
@@ -144,6 +144,11 @@ export class AppProvider extends Component {
   setPage = page => this.setState( { page } );
 
   setFilterCoins = (filteredCoins) => this.setState( { filteredCoins } );
+
+  changeChartSelect = (value) => {
+    console.log(value);
+    this.setState({timeInterval: value, historical: null}, this.fetchHistorical);
+  };
 
   render() {
     return (
