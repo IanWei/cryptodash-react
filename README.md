@@ -7,7 +7,8 @@ The project is demonstrating the Crypto Coins in the market.
 
 ## Feature
 ```
-Select your favourite crypto coins on the setting page. Confirm your favourite crypto coins, and demonstrate the trend of the coin in the dashboard page. 
+Select your favourite crypto coins on the setting page. Confirm your favourite crypto coins, 
+and demonstrate the trend of the coin in the dashboard page. 
 ```
 
 ## Project setup
