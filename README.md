@@ -9,6 +9,9 @@ The project is demonstrating the Crypto Coins in the market.
 ```
 Select your favourite crypto coins on the setting page. Confirm your favourite crypto coins, 
 and demonstrate the trend of the coin in the dashboard page. 
+
+Use styled-component library to style the app
+
 ```
 
 ## Project setup
