@@ -90,7 +90,7 @@ export class AppProvider extends Component {
 
   addCoin = key => {
     let favorites = [ ...this.state.favorites ];
-    if ( favorites.length < MAX_FAVORITES ) {
+    if ( favorites.length < MAX_FAVORITES && !_.includes(favorites, key) ) {
       favorites.push( key );
       this.setState( { favorites } )
     }
